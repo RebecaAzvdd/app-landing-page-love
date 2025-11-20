@@ -1,1 +1,2 @@
 Link design base: https://www.canva.com/design/DAG4ZySymD8/WTMG0xzwa0-50j5DWQz9aA/edit?utm_content=DAG4ZySymD8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+Link api: https://rapidapi.com/ajith/api/love-calculator
