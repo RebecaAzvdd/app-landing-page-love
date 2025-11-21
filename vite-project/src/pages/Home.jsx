@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Button from '../components/atoms/button';
-import Input from '../components/atoms/input';
-import { calculateLove } from '../controller/loveApi'; 
 import Section from '../components/section';
 import { famosos } from '../types';
 import LoveBar from '../components/loveBar';
@@ -10,9 +7,6 @@ import Footer from '../components/footer';
 const Home = () => {
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-
   const handleFamousClick = (famousName) => {
     if (!name1.trim()) {
       console.log('Por favor, digite seu nome primeiro na calculadora!');
