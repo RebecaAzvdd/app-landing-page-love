@@ -1,26 +1,32 @@
 import React from 'react';
 
-const CardPhoto = ({ src, alt = "Foto romântica aleatória" }) => {
+const CardPhoto = ({ src, alt = "Foto", width = "100%", height = "auto" }) => {
   
-  const randomSrc = src || `https://placehold.co/400x300/F9F6F2/9E7F68?text=Imagem`;
+  const containerStyle = {
+    background: 'white',
+    padding: '10px',
+    borderRadius: '16px',
+    boxShadow: '0 10px 30px rgba(158, 127, 104, 0.15)', 
+    display: 'inline-block',
+    // Se a largura for 100%, ocupa o pai. Se for fixa (ex: 350px), respeita o fixo.
+    width: width === "100%" ? "100%" : "auto" 
+  };
 
-  const style = {
-    width: '100%',
-    height: '150px', 
+  const imgStyle = {
+    width: width === "100%" ? "100%" : width,
+    height: height,
+    objectFit: 'cover',
     borderRadius: '12px',
-    overflow: 'hidden',
-    backgroundColor: '#F9F6F2', 
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    display: 'block'
   };
 
   return (
-    <div style={style}>
+    <div style={containerStyle}>
+      {/* Se não vier imagem (src), usa um placeholder para não quebrar o layout */}
       <img 
-        src={randomSrc} 
+        src={src || "https://placehold.co/400x500/9E7F68/FFF?text=Foto"} 
         alt={alt} 
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        style={imgStyle} 
       />
     </div>
   );
