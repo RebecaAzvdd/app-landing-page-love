@@ -1,11 +1,17 @@
 import React from "react";
 
-const Button = ({ children, onClick, icon, width = "auto", type = "button", disabled = false }) => {
+const Button = ({ children, onClick, icon, width = "auto", type = "button", disabled = false, variant = "primary" }) => {
+
+    const colors = {
+        primary: '#9E7F68', 
+        secondary: '#FFF',
+        disabled: '#D7CCC8'
+    };
 
     const style = {
-        backgroundColor: disabled ? '#D7CCC8' : '#9E7F68',
-        color: '#FFF',
-        border: 'none',
+        backgroundColor: variant === 'light' ? colors.secondary : (disabled ? colors.disabled : colors.primary),
+        color: variant === 'light' ? colors.primary : '#FFF',
+        border: variant === 'light' ? `1px solid ${colors.primary}` : 'none',
         borderRadius: '8px',
         padding: '12px 24px',
         fontSize: '16px',

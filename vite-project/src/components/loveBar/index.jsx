@@ -1,70 +1,60 @@
-import { useState } from "react";
-import { calculateLove } from "../../controller/loveApi";
+import React from "react";
 import Button from "../atoms/button";
 import Input from "../atoms/input";
 
-export default function LoveBar() {
-  const [name1, setName1] = useState("");
-  const [name2, setName2] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+// Recebe name1, setName1, etc. da Home (Lifting State Up)
+// Isso permite que o clique no Famoso atualize o input aqui dentro.
+export default function LoveBar({ name1, setName1, name2, setName2, onCalculate, loading }) {
 
+  // Estilos Inline 
   const sectionStyle = {
     maxWidth: "1000px",
     margin: "0 auto",
-    padding: "40px 20px",
+    padding: "60px 20px",
     textAlign: "center",
+    backgroundColor: "#FDFBF9" // Fundo leve para diferenciar a seção
   };
 
   const calculatorCardStyle = {
     backgroundColor: "#FFF",
     padding: "40px",
     borderRadius: "20px",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
     marginTop: "20px",
+    maxWidth: "800px",
+    marginLeft: "auto",
+    marginRight: "auto"
   };
 
-  const handleCalculate = async (e) => {
-    if (e) e.preventDefault();
-
-    if (!name1.trim() || !name2.trim()) {
-      alert("Preencha ambos os nomes para consultar o destino!");
-      return;
-    }
-
-    setLoading(true);
-    setResult(null);
-
-    try {
-      const data = await calculateLove(name1, name2);
-      setResult(data);
-    } catch (error) {
-      console.error(error);
-      setResult({
-        percentage: "X",
-        result: "Erro na API.",
-        fname: name1,
-        sname: name2,
-      });
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onCalculate();
   };
 
   return (
-    <>
-      <section style={sectionStyle}>
-        <h1
-          style={{ color: "#9E7F68", fontSize: "2.5rem", marginBottom: "10px" }}
-        >
+    <section id="calculator" style={sectionStyle}>
+      <div className="container">
+         {/* Tag visual igual ao design */}
+        <span style={{ 
+            color: "#D7CCC8", 
+            fontWeight: "bold", 
+            fontSize: "0.8rem", 
+            textTransform: "uppercase", 
+            display: "block", 
+            marginBottom: "5px" 
+        }}>
+          DESTINO
+        </span>
+
+        <h1 style={{ color: "#9E7F68", fontSize: "2.5rem", marginBottom: "10px", fontFamily: '"Playfair Display", serif' }}>
           Calculadora do Amor
         </h1>
-        <p style={{ color: "#8D6E63", marginBottom: "30px" }}>
-          Título, slogan e o formulário principal de cálculo.
+        <p style={{ color: "#6D4C41", marginBottom: "30px" }}>
+          Descubra a compatibilidade perfeita entre dois corações através da magia dos nomes.
         </p>
 
         <div style={calculatorCardStyle}>
-          <form onSubmit={handleCalculate}>
+          <form onSubmit={handleSubmit}>
             <div
               style={{
                 display: "flex",
@@ -77,7 +67,7 @@ export default function LoveBar() {
               <div style={{ flex: 1, minWidth: "250px" }}>
                 <Input
                   label="Seu Nome"
-                  placeholder="Seu nome..."
+                  placeholder="Digite seu nome..."
                   value={name1}
                   onChange={(e) => setName1(e.target.value)}
                 />
@@ -94,42 +84,11 @@ export default function LoveBar() {
             </div>
 
             <Button width="100%" type="submit" disabled={loading}>
-              {loading
-                ? "Consultando as Estrelas..."
-                : "Calcular Compatibilidade"}
+              {loading ? "Consultando as Estrelas..." : "Calcular Compatibilidade"}
             </Button>
           </form>
         </div>
-      </section>
-
-      {result && (
-        <section style={sectionStyle}>
-          <div
-            style={{
-              backgroundColor: "#9E7F68",
-              color: "#FFF",
-              padding: "30px",
-              borderRadius: "20px",
-              marginTop: "40px",
-            }}
-          >
-            <h2 style={{ margin: 0 }}>
-              Resultado da Compatibilidade com {result.sname}
-            </h2>
-            <div
-              style={{
-                fontSize: "4rem",
-                fontWeight: "bold",
-                margin: "10px 0",
-                animation: "fadeIn 1s ease-out",
-              }}
-            >
-              {result.percentage}%
-            </div>
-            <p style={{ fontSize: "1.2rem" }}>{result.result}</p>
-          </div>
-        </section>
-      )}
-    </>
+      </div>
+    </section>
   );
 }
