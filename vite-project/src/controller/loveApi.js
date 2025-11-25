@@ -1,24 +1,22 @@
-export const calculateLove = (name1, name2) => {
-  // return new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     const percentage = Math.floor(Math.random() * 101);
-      
-  //     let resultText = "O destino é incerto.";
-      
-  //     if (percentage > 80) {
-  //       resultText = "Almas Gêmeas! O universo conspira a favor.";
-  //     } else if (percentage > 50) {
-  //       resultText = "Grande potencial, mas o diálogo é chave.";
-  //     } else {
-  //       resultText = "Os astros sugerem cautela e paciência.";
-  //     }
+export async function calculateLove(nome1, nome2) {
+  const options = {
+    method: 'GET',
+    url: 'https://love-calculator.p.rapidapi.com/getPercentage',
+    params: {
+      sname: nome1,
+      fname: nome2,
+    },
+    headers: {
+      "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+      "X-RapidAPI-Host": process.env.RAPIDAPI_HOST
+    },
+  };
 
-  //     resolve({
-  //       fname: name1,
-  //       sname: name2,
-  //       percentage: percentage,
-  //       result: resultText
-  //     });
-  //   }, 1500); 
-  // });
-};
+  try {
+    const response = await axios.request(options);
+    return response.data; 
+  } catch (error) {
+    console.error('Erro na requisição:', error);
+    return null;
+  }
+}

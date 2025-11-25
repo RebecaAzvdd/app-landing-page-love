@@ -1,29 +1,9 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import '../App.css'; 
-
-// Componentes
 import Hero from '../components/hero';
-import CardNavigate from '../components/cardNavigate';
 import LoveBar from '../components/loveBar';
-import CardInfos from '../components/cardInfos';
 import Section from '../components/section'; 
-
-// Controller
 import { calculateLove } from '../controller/loveApi';
-
-// --- IMPORTAÇÃO DAS IMAGENS LOCAIS (Nomes Corrigidos pelo Print) ---
-import cauaImg from '../assets/cauaImg.jpg'; 
-import anittaImg from '../assets/anittaImg.jpg';
-import neymarImg from '../assets/neymarImg.jpeg'; 
-import beyonceImg from '../assets/beyonceImg.jpg';
-import chrisImg from '../assets/chrisImg.jpg';
-import zendayaImg from '../assets/zendayaImg.jpg';
-import michaelImg from '../assets/micahelImg.jpg'; 
-import brunaImg from '../assets/brunaImg.jpg';
-import lazaroImg from '../assets/lazaroImg.jpg';
-import rihannaImg from '../assets/rihannaImg.jpg';
-import brunoImg from '../assets/brunoImg.jpeg'; 
-import izaImg from '../assets/izaImg.jpg';
 
 export default function Home() {
   const [userName, setUserName] = useState('');
@@ -33,20 +13,12 @@ export default function Home() {
 
   const famosos = [
 
-    { id: 1, nome: 'Cauã Reymond', tag: 'Ator', img: cauaImg },
-    { id: 2, nome: 'Anitta', tag: 'Cantora', img: anittaImg },
-    { id: 3, nome: 'Neymar Jr', tag: 'Atleta', img: neymarImg },
-    { id: 4, nome: 'Beyoncé', tag: 'Diva Pop', img: beyonceImg },
- 
-    { id: 5, nome: 'Chris Hemsworth', tag: 'Ator', img: chrisImg },
-    { id: 6, nome: 'Zendaya', tag: 'Atriz', img: zendayaImg },
-    { id: 7, nome: 'Michael B. Jordan', tag: 'Ator', img: michaelImg },
-    { id: 8, nome: 'Bruna Marquezine', tag: 'Atriz', img: brunaImg },
-
-    { id: 9, nome: 'Lázaro Ramos', tag: 'Ator', img: lazaroImg },
-    { id: 10, nome: 'Rihanna', tag: 'Cantora', img: rihannaImg },
-    { id: 11, nome: 'Bruno Mars', tag: 'Cantor', img: brunoImg },
-    { id: 12, nome: 'Iza', tag: 'Cantora', img: izaImg }
+    { id: 1, nome: 'Cauã Reymond', tag: 'Ator', img: '/cauaImg.jpg' },
+    { id: 2, nome: 'Anitta', tag: 'Cantora', img: "/anittaImg.jpg" },
+    { id: 3, nome: 'Neymar Jr', tag: 'Atleta', img: "/neymarImg.jpeg"},
+    { id: 4, nome: 'Beyoncé', tag: 'Diva Pop', img: "/beyonceImg.jpg" },
+    { id: 5, nome: 'Chris Hemsworth', tag: 'Ator', img: "/chrisImg.jpg" },
+    { id: 6, nome: 'Zendaya', tag: 'Atriz', img: "/zendayaImg.jpg" },
   ];
 
   const handleCalculate = async (pName1, pName2) => {
@@ -86,8 +58,6 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <CardNavigate />
-      
       <LoveBar 
         name1={userName} setName1={setUserName}
         name2={partnerName} setName2={setPartnerName}
