@@ -1,22 +1,26 @@
-export async function calculateLove(nome1, nome2) {
-  const options = {
-    method: 'GET',
-    url: 'https://love-calculator.p.rapidapi.com/getPercentage',
-    params: {
-      sname: nome1,
-      fname: nome2,
-    },
-    headers: {
-      "X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
-      "X-RapidAPI-Host": process.env.RAPIDAPI_HOST
-    },
-  };
+import axios from "axios";
 
+export async function calculateLove(nome1, nome2) {
   try {
-    const response = await axios.request(options);
-    return response.data; 
+    const response = await axios.get(
+      "https://love-calculator.p.rapidapi.com/LoveCalculator/calculate",
+      {
+        params: {
+          FirstName: nome1,
+          SecondName: nome2,
+        },
+        headers: {
+          "x-rapidapi-key": "58bcb62975msha0bdb00212cc120p12227bjsncc50adc2041a",
+          "x-rapidapi-host": "love-calculator.p.rapidapi.com",
+          "X-API-KEY": "de305d54-75b4-431b-adb2-eb6b9e546014",
+        },
+      }
+    );
+
+    return response.data;
+
   } catch (error) {
-    console.error('Erro na requisição:', error);
+    console.error("Erro na requisição:", error);
     return null;
   }
 }
