@@ -3,6 +3,7 @@ import "../App.css";
 import Hero from "../components/hero";
 import LoveBar from "../components/loveBar";
 import Section from "../components/section";
+import Footer from "../components/footer";
 import { calculateLove } from "../controller/loveApi";
 
 export default function Home() {
@@ -113,6 +114,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
